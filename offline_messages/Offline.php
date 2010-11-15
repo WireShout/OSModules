@@ -2,8 +2,8 @@
 	$OMTN = 'OfflineMessages';
 	
 	/* Process offile_message requests */
-	$method = (isset($_SERVER['PATH_INFO'])) ? $_SERVER['PATH_INFO'] : 'none';
-	$data   = (isset($HTTP_RAW_POST_DATA)) ? substr($HTTP_RAW_POST_DATA,3) : '';
+	$method = (isset($_SERVER['PATH_INFO'])) ? $_SERVER['PATH_INFO'] : '';
+	$data   = (isset($HTTP_RAW_POST_DATA)) ? substr($HTTP_RAW_POST_DATA, 41) : '';
 	
 	if ($method == '/SaveMessage/') {
 		require_once('database.php');
@@ -23,7 +23,7 @@
 		require_once('database.php');
 		$db = mysql_connect(HOST,USER,PASS);
 			  mysql_select_db(DB);
-		
+			  
 		if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '$OMTN'")) <= 0) mysql_query('CREATE TABLE IF NOT EXISTS `'.$OMTN.'` (`uuid` varchar(36) NOT NULL,`message` text NOT NULL, KEY `uuid` (`uuid`))');
 
 		$userID = getBetween($data, '<Guid>', '</Guid>');
@@ -33,11 +33,11 @@
 			$array_messages = array();
 			while($row = mysql_fetch_array($query)) {
 				$array_messages[] = $row['message'];
-			}
+			} @mysql_query("DELETE FROM `$OMTN` WHERE uuid='$userID'");
 		} mysql_close($db);
 		
-		echo '<?xml version=\"1.0\" encoding=\"utf-8\"?><ArrayOfGridInstantMessage xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">';
-        if(isset($array_messages)) echo implode('',$array_messages);
+		echo '<?xml version="1.0" encoding="utf-8"?><ArrayOfGridInstantMessage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
+        if(isset($array_messages)) echo implode('', $array_messages);
 		echo '</ArrayOfGridInstantMessage>';
 	}
 	
