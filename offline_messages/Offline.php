@@ -1,4 +1,13 @@
-<?php	
+<?php
+	/*
+		Offline Message module
+		''''''''''''''''''''''
+		Created by DEVI (dev José Vera - Jor3l)
+		devi S.A.S - Bogotá, Colombia
+		http://foravatars.com
+		jor3l@foravatars.com
+		''''''''''''''''''''''
+	*/
 	$OMTN = 'OfflineMessages';
 	
 	/* Process offile_message requests */
