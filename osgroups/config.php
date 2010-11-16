@@ -1,15 +1,19 @@
 <?php
+	/* SECURITY KEYS */
+	
+	$securityReadKey    = ''; //'1234';
+	$securityWriteKey   = ''; //'1234';
 	
 	/* DATA BASE INFO */
 	
-	$databaseName     = 'databaseName';
-	$databaseUserName = 'databaseUserName';
-	$databasePassword = 'databasePassword';
+	$databaseName     = 'opensim_modules';
+	$databaseUserName = 'opensim_modules';
+	$databasePassword = 'osModules';
 	$databaseHost     = 'localhost'; /* Optional */
 	
 	/* DATA EXPORT */
 	
-	$exportFormat     = 'json';
+	$exportFormat     = 'xml'; // xml/json
 	
 	/* DEBUG */
 	

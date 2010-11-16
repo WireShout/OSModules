@@ -133,21 +133,22 @@ function xml2array($contents, $get_attributes=1, $priority = 'tag') {
     return($xml_array); 
 } 
 
+/* Creates a look-a-like XML response from array */
 function array2xml($data) {
-	$buffer = '<?xml version="1.0"?><methodResponse><params>';
+	$buffer = '<?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct>';
 	foreach($data as $key => $val) {
-		$buffer .= '<param><value><struct><member><name>' . $key . '</name><value>';
+		$buffer .= '<member><name>' . $key . '</name><value>';
 		if(is_array($val)) {
 			$buffer .= '<struct>';
 			foreach($val as $k => $v) {
-				$buffer .= '<member><name>' . $k . '</name><value><string>'.$v.'</string></value></member>';
+				$buffer .= '<member><name>' . $k . '</name><value><string>' . $v . '</string></value></member>';
 			}
 			$buffer .= '</struct>';
 		} else {
 			$buffer .= '<string>' . $val . '</string>';
 		}
-		$buffer .= '</value></member></struct></value></param>';
+		$buffer .= '</value></member>';
 	} 
-	$buffer .= '</params></methodResponse>';
+	$buffer .= '</struct></value></param></params></methodResponse>';
 	return $buffer;
 }

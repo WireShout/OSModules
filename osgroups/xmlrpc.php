@@ -2,6 +2,7 @@
 	require_once('config.php');
 	require_once('require/GroupFunctions.php');
 	require_once('require/XmlFunctions.php');
+	require_once('require/SomeFunctions.php');
 	
 	$data   = (isset($HTTP_RAW_POST_DATA)) ? $HTTP_RAW_POST_DATA : '';
 	$trashTags = array('<param>','</param>','<value>','</value>','<member>','</member>','<struct>','</struct>');
@@ -11,9 +12,18 @@
 
 	$Names  = $arrayData['methodCall']['params']['name'];
 	$Values = $arrayData['methodCall']['params']['string'];
+
 	$params = array_combine($Names, $Values);
 	
-	$result = $function($params);
+	$params['ReadKey']  = (is_array($params['ReadKey'])) ? implode('', $params['ReadKey']) : $params['ReadKey'];
+	$params['WriteKey'] = (is_array($params['WriteKey'])) ? implode('', $params['WriteKey']) : $params['WriteKey'];
+
+	$check  = simpleSecurityCheck($params);
+	if(!is_array($check) && $check) {
+		$result = $function($params);
+	} else {
+		$result = $check;
+	}
 	
 	if($exportFormat == 'json') {
 		header('Content-type: text/json');
