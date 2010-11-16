@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<methodResponse>
+	<params>
+		<param>
+			<value>
+				<struct>
+					<member>
+						<name>3bd2ee88-2c71-4a30-a84f-beedcd0add2c</name>
+						<value>
+							<struct>
+								<member>
+									<name>GroupID</name>
+									<value>
+										<string>3bd2ee88-2c71-4a30-a84f-beedcd0add2c</string>
+									</value>
+								</member>
+								<member>
+									<name>GroupName</name>
+									<value>
+										<string>Test</string>
+									</value>
+								</member>
+							</struct>
+						</value>
+					</member>
+				</struct>
+			</value>
+		</param>
+	</params>
+</methodResponse>
