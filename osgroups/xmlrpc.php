@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	require_once('config.php');
 	require_once('require/GroupFunctions.php');
 	require_once('require/XmlFunctions.php');
