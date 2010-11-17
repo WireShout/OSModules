@@ -1,4 +1,12 @@
 <?php
+	/* OSGroups, XMLRPC implementation.
+	 *
+	 * version 0.1 - release
+	 * developed by devi S.A.S (http://foravatars.com)
+	 * based on floatsam XMLRPCGroups (https://github.com/mcortez/flotsam)
+	 * for help/support: https://github.com/jor3l/OSModules/issues
+	*/
+	
 	require_once('config.php');
 	require_once('require/GroupFunctions.php');
 	require_once('require/XmlFunctions.php');

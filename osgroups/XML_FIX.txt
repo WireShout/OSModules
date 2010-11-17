@@ -1,0 +1,24 @@
+XML console error fix for OpenSim:
+..................................
+
+	This should fix an error with Mono XML reading an UTF-8 file, the console output looks like this:
+
+--------------- ERROR -----------------
+[XMLRPC-GROUPS-CONNECTOR]: System.Xml.XmlException: Text node cannot appear in this state.  Line 2, position 1.
+  at Mono.Xml2.XmlTextReader.ReadText (Boolean notWhitespace) [0x00000] 
+  at Mono.Xml2.XmlTextReader.ReadContent () [0x00000] 
+  at Mono.Xml2.XmlTextReader.Read () [0x00000] 
+  at System.Xml.XmlTextReader.Read () [0x00000] 
+  at Nwc.XmlRpc.XmlRpcResponseDeserializer.Deserialize (System.IO.TextReader xmlData) [0x00000] 
+  at Nwc.XmlRpc.XmlRpcRequest.Send (System.String url, Int32 timeout) [0x00000] 
+  at OpenSim.Region.OptionalModules.Avatar.XmlRpcGroups.XmlRpcGroupsServicesConnectorModule.XmlRpcCall (UUID requestingAgentID, System.String function, System.Collections.Hashtable param) [0x00000]  
+-----------------------------------------
+
+FIX:
+
+	You need to change each file format to ANSI, we ship them with ANSI codification, anyway this migth change (github?).
+	
+	To fix this, download a text editor (we use Notepad++ - http://notepad-plus-plus.org/) and open each file in this folder,
+	then go to Format (next to view) and select ANSI (the first item), you do not need to save each file.
+	
+	Now, test again and see if your groups are working.
