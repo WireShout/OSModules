@@ -33,6 +33,9 @@
         $ownerRoleID    = $params["OwnerRoleID"];
         $everyonePowers = $params["EveryonePowers"];
         $ownersPowers   = $params["OwnersPowers"];
+	
+	 if(empty($groupID) || empty($name) || empty($founderID) || empty($insigniaID))
+		return array('error' => 'Some necessary params were empty.');
         
         $escapedParams         = array_map("mysql_real_escape_string", $params);
         $escapedGroupID        = $escapedParams["GroupID"];
@@ -51,7 +54,7 @@
         $sql = "INSERT INTO osgroup
                 (GroupID, Name, Charter, InsigniaID, FounderID, MembershipFee, OpenEnrollment, ShowInList, AllowPublish, MaturePublish, OwnerRoleID)
                 VALUES
-                ('$escapedGroupID', '$escapedName', '$escapedCharter', '$escapedInsigniaID', '$escapedFounderID', $escapedMembershipFee, $escapedOpenEnrollment, $escapedShowInList, $escapedAllowPublish, $escapedMaturePublish, '$escapedOwnerRoleID')";
+                ('$escapedGroupID', '$escapedName', '$escapedCharter', '$escapedInsigniaID', '$escapedFounderID', '$escapedMembershipFee', '$escapedOpenEnrollment', '$escapedShowInList', '$escapedAllowPublish', '$escapedMaturePublish', '$escapedOwnerRoleID')";
         
         if (!mysql_query($sql, $groupDBCon))
         {
@@ -117,7 +120,7 @@
         }
         
         $sql = " INSERT INTO osrole (GroupID, RoleID, Name, Description, Title, Powers) VALUES "
-              ." ('$groupID', '$roleID', '$name', '$desc', '$title', $powers)";
+              ." ('$groupID', '$roleID', '$name', '$desc', '$title', '$powers')";
 
         if (!mysql_query($sql, $groupDBCon))
         {
@@ -174,7 +177,7 @@
         }
         if( isset($params['Powers']) )
         {
-            $sql .= ", Powers = $powers";
+            $sql .= ", Powers = '$powers'";
         }
         
         $sql .= " WHERE GroupID = '$groupID' AND RoleID = '$roleID'";
@@ -289,11 +292,11 @@
                 SET
                     Charter = '$charter'
                     , InsigniaID = '$insigniaID'
-                    , MembershipFee = $membershipFee
-                    , OpenEnrollment= $openEnrollment
-                    , ShowInList    = $showInList
-                    , AllowPublish  = $allowPublish
-                    , MaturePublish = $maturePublish
+                    , MembershipFee = '$membershipFee'
+                    , OpenEnrollment= '$openEnrollment'
+                    , ShowInList    = '$showInList'
+                    , AllowPublish  = '$allowPublish'
+                    , MaturePublish = '$maturePublish'
                 WHERE
                     GroupID = '$groupID'";
         

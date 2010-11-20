@@ -6,9 +6,9 @@
 	
 	/* DATA BASE INFO */
 	
-	$databaseName     = 'opensim_modules';
-	$databaseUserName = 'opensim_modules';
-	$databasePassword = 'osModules';
+	$databaseName     = 'DATABASENAME';
+	$databaseUserName = 'USERNAME';
+	$databasePassword = 'PASSWORD';
 	$databaseHost     = 'localhost'; /* Optional */
 	
 	/* DATA EXPORT */

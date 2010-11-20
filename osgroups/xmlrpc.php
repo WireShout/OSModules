@@ -13,8 +13,12 @@
 	require_once('require/SomeFunctions.php');
 	
 	$data   = (isset($HTTP_RAW_POST_DATA)) ? $HTTP_RAW_POST_DATA : '';
+	//if(empty($data)) die('OSGroups module.');
 	$trashTags = array('<param>','</param>','<value>','</value>','<member>','</member>','<struct>','</struct>');
-	$arrayData = xml2array(str_replace($trashTags, '', $data));
+	//$fixTags   = array('<i4>', '</i4>', '<string />');
+	//$fixTo     = array('<string>', '</string>', '<string></string>');
+	$cleanedXML = str_replace($trashTags, '', $data);
+	$arrayData = xml2array(str_replace($fixTags, $fixTo, $cleanedXML));
 	
 	$function  = str_replace('groups.', '', $arrayData['methodCall']['methodName']);
 
@@ -27,8 +31,20 @@
 	$params['WriteKey'] = (is_array($params['WriteKey'])) ? implode('', $params['WriteKey']) : $params['WriteKey'];
 
 	$check  = simpleSecurityCheck($params);
-	if(!is_array($check) && $check) {
+	if(!isset($check['error'])) {
 		$result = $function($params);
+		if(isset($result['error']) && $debugLog) {
+			$fh = fopen($debugFile, 'a+');
+			$date = date('F j, Y, g:i a');
+
+			fwrite($fh, "\n".'-----------ERROR LOG: ' . $date . '--------------');
+			fwrite($fh, 'Original Request XML:'."\n\n" . $data);
+			fwrite($fh, "\n\n".'Parsed params:'."\n\n" . json_encode($params));
+			fwrite($fh, "\n\n".'Request result:'."\n\n" . json_encode($result));
+			fwrite($fh, '---------------------------------------------------------------'."\n");
+
+			fclose($fh);
+		}
 	} else {
 		$result = $check;
 	}
