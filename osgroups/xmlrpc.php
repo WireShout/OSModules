@@ -13,10 +13,10 @@
 	require_once('require/SomeFunctions.php');
 	
 	$data   = (isset($HTTP_RAW_POST_DATA)) ? $HTTP_RAW_POST_DATA : '';
-	//if(empty($data)) die('OSGroups module.');
+	if(empty($data)) die('OSGroups module.');
 	$trashTags = array('<param>','</param>','<value>','</value>','<member>','</member>','<struct>','</struct>');
-	//$fixTags   = array('<i4>', '</i4>', '<string />');
-	//$fixTo     = array('<string>', '</string>', '<string></string>');
+	$fixTags   = array('<i4>', '</i4>', '<string />');
+	$fixTo     = array('<string>', '</string>', '<string></string>');
 	$cleanedXML = str_replace($trashTags, '', $data);
 	$arrayData = xml2array(str_replace($fixTags, $fixTo, $cleanedXML));
 	
