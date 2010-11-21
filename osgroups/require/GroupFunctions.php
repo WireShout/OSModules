@@ -32,7 +32,7 @@
         $maturePublish  = $params["MaturePublish"];
         $ownerRoleID    = $params["OwnerRoleID"];
         $everyonePowers = $params["EveryonePowers"];
-        $ownersPowers   = $params["OwnersPowers"];
+        $ownersPowers   = 490382185988094; //$params["OwnersPowers"];
 	
 	 if(empty($groupID) || empty($name) || empty($founderID) || empty($insigniaID))
 		return array('error' => 'Some necessary params were empty.');
