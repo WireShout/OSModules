@@ -33,6 +33,7 @@
 	
 	echo '</blockquote><br/>----------------------------------------<br/><h4>Done!</h4>';
 	
+        mysql_close($database);
 	
 	function table_exists ($table, $db) { 
 		$tables = mysql_list_tables ($db); 
