@@ -22,8 +22,6 @@
 	
 	echo '<h3>Connected to database, installing...</h3><br/>----------------------------------------<br/><br/><blockquote>'; flush();
 	
-	/** Check if we should perform the install process **/
-	
 	foreach($installData as $table->$query) {
 		if(!table_exists($table, $database)) {
 			$exec = mysql_query($query) or echo('> Error for table \'' . $table . '\': ' . mysql_error());
