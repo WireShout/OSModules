@@ -27,7 +27,7 @@
 			$exec = mysql_query($query) or echo('> Error for table \'' . $table . '\': ' . mysql_error());
 			if($exec) '> Table \'' . $table . '\' created!'.
 			echo '<br/>';
-		} else echo '> Table \'' . $table . '\' already exists, skiped!.<br/>'.
+		} else echo '> Table \'' . $table . '\' already exists, skipped!.<br/>'.
 		flush();
 	}
 	
