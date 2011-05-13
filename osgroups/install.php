@@ -20,27 +20,26 @@
 	
     mysql_select_db($databaseName, $database); /* Select DB */
 	
-	echo '<h3>Connected to database, installing...</h3><br/>----------------------------------------<br/><br/><blockquote>'; flush();
+	echo '<h3>Connected to database, installing...</h3>----------------------------------------<br/><blockquote>'; flush();
 	
-	foreach($installData as $table->$query) {
+	flush();
+	foreach($installData as $table=>$query) {
 		if(!table_exists($table, $database)) {
 			$exec = mysql_query($query) or print('> Error for table \'' . $table . '\': ' . mysql_error());
-			if($exec) '> Table \'' . $table . '\' created!'.
+			if($exec) echo '> Table \'' . $table . '\' created!';
 			echo '<br/>';
 		} else echo '> Table \'' . $table . '\' already exists, skipped!.<br/>'.
 		flush();
 	}
 	
-	echo '</blockquote><br/>----------------------------------------<br/><h4>Done!</h4>';
+	echo '</blockquote>----------------------------------------<br/><h4>Done!</h4>';
 	
         mysql_close($database);
 	
-	function table_exists ($table, $db) { 
-		$tables = mysql_list_tables ($db); 
-		while (list ($temp) = mysql_fetch_array ($tables)) {
-			if ($temp == $table) {
-				return TRUE;
-			}
-		}
-		return FALSE;
+	
+	function table_exists($tableName, $dbLink) {
+	   $tables = array();
+	   $tablesResult = mysql_query("SHOW TABLES", $dbLink);
+	   while ($row = mysql_fetch_row($tablesResult)) $tables[] = $row[0];
+	   return(in_array($tableName, $tables));
 	}
