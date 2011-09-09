@@ -2,7 +2,7 @@
 	/* OSGroups, XMLRPC implementation.
 	 *
 	 * version 0.1 - release
-	 * developed by devi S.A.S (http://foravatars.com)
+	 * developed by devi S.A.S (http://devi.com.co)
 	 * based on floatsam XMLRPCGroups (https://github.com/mcortez/flotsam)
 	 * for help/support: https://github.com/jor3l/OSModules/issues
 	*/

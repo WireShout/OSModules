@@ -2,10 +2,9 @@
 	/*
 		Offline Message module
 		''''''''''''''''''''''
-		Created by DEVI (dev José Vera - Jor3l)
+		Created by DEVI (Jose Vera - @jor3l)
 		devi S.A.S - Bogotá, Colombia
-		http://foravatars.com
-		jor3l@foravatars.com
+		http://devi.com.co
 		''''''''''''''''''''''
 	*/
 	$OMTN = 'OfflineMessages';
@@ -22,6 +21,8 @@
 		if(mysql_num_rows(mysql_query("SHOW TABLES LIKE '$OMTN'")) <= 0) mysql_query('CREATE TABLE IF NOT EXISTS `'.$OMTN.'` (`uuid` varchar(36) NOT NULL,`message` text NOT NULL, KEY `uuid` (`uuid`))');
 		
 		$toAgent = getBetween($data, '<toAgentID>', '</toAgentID>');
+		
+		$data = mysql_escape_string($data); // Thanks to M.E. Verhagen
 		
 		mysql_query("INSERT INTO `$OMTN` (uuid, message) VALUES ('$toAgent', '$data')") or die('<?xml version="1.0" encoding="utf-8"?><boolean>false</boolean>');
 		echo '<?xml version="1.0" encoding="utf-8"?><boolean>true</boolean>'; // Offline message stored.
